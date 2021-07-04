@@ -1,9 +1,6 @@
 package adaguz.jazs12331nbp.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.Date;
 
@@ -12,17 +9,21 @@ public class GoldResponse {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Enumerated(EnumType.STRING)
     private Gold gold;
-    private Date start_date;
-    private Date end_date;
+    @Column(name = "startdate")
+    private Date startDate;
+    @Column(name = "enddate")
+    private Date endDate;
     private double exchange;
+    @Column(name = "creationdate")
     private LocalDateTime creationDate;
 
-    public GoldResponse(Long id, Gold gold, Date start_date, Date end_date, double exchange, LocalDateTime creationDate) {
+    public GoldResponse(Long id, Gold gold, Date startDate, Date endDate, double exchange, LocalDateTime creationDate) {
         this.id = id;
         this.gold = gold;
-        this.start_date = start_date;
-        this.end_date = end_date;
+        this.startDate = startDate;
+        this.endDate = endDate;
         this.exchange = exchange;
         this.creationDate = creationDate;
     }
@@ -47,19 +48,19 @@ public class GoldResponse {
     }
 
     public Date getStart_date() {
-        return start_date;
+        return startDate;
     }
 
     public void setStart_date(Date start_date) {
-        this.start_date = start_date;
+        this.startDate = start_date;
     }
 
     public Date getEnd_date() {
-        return end_date;
+        return endDate;
     }
 
     public void setEnd_date(Date end_date) {
-        this.end_date = end_date;
+        this.endDate = end_date;
     }
 
     public double getExchange() {
