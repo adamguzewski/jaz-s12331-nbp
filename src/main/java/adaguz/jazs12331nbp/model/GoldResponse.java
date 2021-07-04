@@ -1,25 +1,33 @@
 package adaguz.jazs12331nbp.model;
 
+import io.swagger.annotations.ApiModelProperty;
+
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Date;
 
 @Entity(name = "goldresponse")
 public class GoldResponse {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @ApiModelProperty(notes = "Id of the result", required = true, example = "1")
     private Long id;
     @Enumerated(EnumType.STRING)
+    @ApiModelProperty(notes = "Name of Gold", required = true, example = "GOLD")
     private Gold gold;
     @Column(name = "startdate")
-    private Date startDate;
+    @ApiModelProperty(notes = "Start date", required = true, example = "2021-05-20")
+    private LocalDate startDate;
     @Column(name = "enddate")
-    private Date endDate;
+    @ApiModelProperty(notes = "End date", required = true, example = "2021-06-10")
+    private LocalDate endDate;
+    @ApiModelProperty(notes = "Average of Gold Prices", required = true, example = "202.22")
     private double exchange;
     @Column(name = "creationdate")
+    @ApiModelProperty(notes = "Creation Date", required = true, example = "2021-07-04T16:08:32.22")
     private LocalDateTime creationDate;
 
-    public GoldResponse(Long id, Gold gold, Date startDate, Date endDate, double exchange, LocalDateTime creationDate) {
+    public GoldResponse(Long id, Gold gold, LocalDate startDate, LocalDate endDate, double exchange, LocalDateTime creationDate) {
         this.id = id;
         this.gold = gold;
         this.startDate = startDate;
@@ -47,19 +55,19 @@ public class GoldResponse {
         this.gold = gold;
     }
 
-    public Date getStart_date() {
+    public LocalDate getStart_date() {
         return startDate;
     }
 
-    public void setStart_date(Date start_date) {
+    public void setStart_date(LocalDate start_date) {
         this.startDate = start_date;
     }
 
-    public Date getEnd_date() {
+    public LocalDate getEnd_date() {
         return endDate;
     }
 
-    public void setEnd_date(Date end_date) {
+    public void setEnd_date(LocalDate end_date) {
         this.endDate = end_date;
     }
 

@@ -9,8 +9,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.List;
 
 @Service
@@ -25,15 +25,15 @@ public class GoldService {
         this.goldRepository = goldRepository;
     }
 
-    public GoldResponse checkGold(Date startDate, Date endDate) {
-        String url = nbpGoldAddress + startDate + "/" + endDate;
+    public GoldResponse checkGold(LocalDate startDate, LocalDate endDate) {
+        String url = "http://api.nbp.pl/api/cenyzlota/" + startDate + "/" + endDate;
         SumOfGoldAverage sumOfGoldAverage = restTemplate.getForObject(url, SumOfGoldAverage.class);
         double average = calculate(sumOfGoldAverage.getAverageCoursesList());
         GoldResponse goldResponse = getResponse(startDate, endDate, average);
         return goldRepository.save(goldResponse);
     }
 
-    private GoldResponse getResponse(Date startDate, Date endDate, double calculate) {
+    private GoldResponse getResponse(LocalDate startDate, LocalDate endDate, double calculate) {
         GoldResponse goldResponse = new GoldResponse();
         goldResponse.setGold(Gold.GOLD);
         goldResponse.setStart_date(startDate);
